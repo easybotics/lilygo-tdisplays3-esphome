@@ -57,10 +57,10 @@ async def to_code(config):
     # This allows using current, unpatched versions of TFT_eSPI
     cg.add_build_flag("-DUSER_SETUP_LOADED")
     cg.add_build_flag("-DST7789_DRIVER")
-    cg.add_build_flag("-DINIT_SEQUENCE_3")
+    #cg.add_build_flag("-DINIT_SEQUENCE_3")
     cg.add_build_flag("-DCGRAM_OFFSET")
-    cg.add_build_flag("-DTFT_RGB_ORDER=TFT_RGB")
-    cg.add_build_flag("-DTFT_INVERSION_ON")
+    #cg.add_build_flag("-DTFT_RGB_ORDER=TFT_RGB")
+    #cg.add_build_flag("-DTFT_INVERSION_ON")
     # cg.add_build_flag("-DTFT_PARALLEL_8_BIT")
     cg.add_build_flag(f"-DTFT_WIDTH={config[CONF_WIDTH]}")
     cg.add_build_flag(f"-DTFT_HEIGHT={config[CONF_HEIGHT]}")
