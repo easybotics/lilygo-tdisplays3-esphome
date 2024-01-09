@@ -44,9 +44,9 @@ CONFIG_SCHEMA = cv.All(
             cv.Optional(CONF_LOAD_FONTS, default=False): cv.boolean,
             cv.Optional(CONF_LOAD_SMOOTH_FONTS, default=False): cv.boolean,
             cv.Optional(CONF_ENABLE_LIBRARY_WARNINGS, default=False): cv.boolean,
-            cv.Optional(CONF_RESET_PIN, default=5): pins.gpio_output_pin_schema,
-            cv.Optional(CONF_CS_PIN, default=6): pins.gpio_output_pin_schema,
-            cv.Optional(CONF_DC_PIN, default=7): pins.gpio_output_pin_schema,
+            cv.Optional(CONF_RESET_PIN, default=1): pins.gpio_output_pin_schema,
+            cv.Optional(CONF_CS_PIN, default=10): pins.gpio_output_pin_schema,
+            cv.Optional(CONF_DC_PIN, default=11): pins.gpio_output_pin_schema,
         }
     ).extend(cv.polling_component_schema("5s")),
 )
@@ -61,7 +61,7 @@ async def to_code(config):
     cg.add_build_flag("-DCGRAM_OFFSET")
     cg.add_build_flag("-DTFT_RGB_ORDER=TFT_RGB")
     cg.add_build_flag("-DTFT_INVERSION_ON")
-    cg.add_build_flag("-DTFT_PARALLEL_8_BIT")
+    # cg.add_build_flag("-DTFT_PARALLEL_8_BIT")
     cg.add_build_flag(f"-DTFT_WIDTH={config[CONF_WIDTH]}")
     cg.add_build_flag(f"-DTFT_HEIGHT={config[CONF_HEIGHT]}")
     cg.add_build_flag(f"-DTFT_RST={config[CONF_RESET_PIN][CONF_NUMBER]}")
@@ -77,6 +77,9 @@ async def to_code(config):
     cg.add_build_flag("-DTFT_D5=46")
     cg.add_build_flag("-DTFT_D6=47")
     cg.add_build_flag("-DTFT_D7=48")
+    cg.add_build_flag("-DTFT_MOSI=13")
+    cg.add_build_flag("-DTFT_CS=10")
+    cg.add_build_flag("-DTFT_SCK=12")
 
     if config[CONF_LOAD_FONTS]:
         cg.add_build_flag("-DLOAD_GLCD")
@@ -101,7 +104,7 @@ async def to_code(config):
     # Touch_reset 21
 
     if config[CONF_BACKLIGHT]:
-        cg.add_build_flag("-DTFT_BL=38")
+        cg.add_build_flag("-DTFT_BL=14")
         cg.add_build_flag("-DTFT_BACKLIGHT_ON=HIGH")
 
     cg.add_library("TFT_eSPI", None)
