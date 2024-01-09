@@ -79,7 +79,7 @@ async def to_code(config):
     cg.add_build_flag("-DTFT_D7=48")
     cg.add_build_flag("-DTFT_MOSI=13")
     cg.add_build_flag("-DTFT_CS=10")
-    cg.add_build_flag("-DTFT_SCK=12")
+    cg.add_build_flag("-DTFT_SCLK=12")
 
     if config[CONF_LOAD_FONTS]:
         cg.add_build_flag("-DLOAD_GLCD")
