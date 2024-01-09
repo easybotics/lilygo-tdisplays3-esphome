@@ -108,6 +108,7 @@ async def to_code(config):
         cg.add_build_flag("-DTFT_BACKLIGHT_ON=HIGH")
 
     cg.add_library("TFT_eSPI", None)
+    cg.add_library("SPI", None)
 
     var = cg.new_Pvariable(config[CONF_ID])
     if cv.Version.parse(ESPHOME_VERSION) < cv.Version.parse("2023.12.0"):
